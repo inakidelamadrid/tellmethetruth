@@ -1,1 +1,6 @@
 devenv/
+.ropeproject
+**/*.swp
+**/*.swo
+**/*.pyc
+**/*__pycache__*
