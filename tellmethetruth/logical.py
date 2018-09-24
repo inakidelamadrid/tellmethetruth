@@ -84,4 +84,6 @@ class LogicalTree(object):
 def cast_node(obj):
     if issubclass(type(obj), LogicalNode):
         return obj
+    elif issubclass(type(obj), LogicalTree):
+        return obj.root
     return ValueNode(obj)
