@@ -23,6 +23,9 @@ class ValueNode(Node):
         super().__init__()
         self.value = value
 
+    def __str__(self):
+        return str(self.value)
+
     def test(self):
         self.bool_value = logic_evaluation(self)
         return self.bool_value
@@ -34,7 +37,13 @@ class LogicalNode(Node):
     NOT = 'not'
 
     def __init__(self, op):
-        self._op = getattr(operator, op)
+        self.op_name = op
+
+        # the operator module attribute needs an appended _
+        self._op = getattr(operator, "{}_".format(op))
+
+    def __str__(self):
+        return self.op_name
 
     @classmethod
     def factory(klass, op):
@@ -69,12 +78,12 @@ class BinomialLogicalNode(LogicalNode):
 
 class ORNode(BinomialLogicalNode):
     def __init__(self):
-        super().__init__('or_')
+        super().__init__('or')
 
 
 class ANDNode(BinomialLogicalNode):
     def __init__(self):
-        super().__init__('and_')
+        super().__init__('and')
 
 
 class LogicalTree(object):

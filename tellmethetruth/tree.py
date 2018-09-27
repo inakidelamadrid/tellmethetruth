@@ -8,6 +8,14 @@ class BinaryTree(LogicalTree):
         node.right = cast_node(right)
         self.root = node
 
+    def to_words(self):
+        words = []
+        self._inorder(self.root, words)
+        return words
+
+    def to_string(self, sep=" "):
+        return sep.join(self.to_words())
+
     def getRoot(self):
         return self.root
 
@@ -17,6 +25,12 @@ class BinaryTree(LogicalTree):
     def deleteTree(self):
         # garbage collector will do this for us.
         self.root = None
+
+    def _inorder(self, node, words):
+        if node:
+            self._inorder(node.left, words)
+            words.append(str(node))
+            self._inorder(node.right, words)
 
     def _postorder(self, node):
         if node:
