@@ -52,3 +52,30 @@ vader = Person('Darth', ['power', 'dark force'])
 mangalovers_tree = BinaryTree(inaki, vader, LogicalNode.AND)
 mangalovers_tree.evaluate()  # > False
 ```
+
+## Using nested trees
+We can nest trees within our root and thus we have leafs. 
+
+```python
+from tellmethetruth.tree import BinaryTree
+from tellmethetruth.logical import LogicalNode
+
+# we can test a tree of manga lovers
+class Person:
+  def __init__(self, name, hobbies=[]):
+    self.name = name
+    self.hobbies = hobbies
+
+  def to_bool(self):
+    return 'manga' in self.hobbies
+
+
+inaki = Person('Inaki', ['manga', 'board games'])
+vader = Person('Darth', ['lightsaber', 'dark force'])
+yoda = Person('Darth', ['lightsaber', 'manga'])
+
+masters = BinaryTree(vader, yoda, LogicalNode.OR)
+# the masters tree now becomes a leaf for the mangalovers tree
+mangalovers_tree = BinaryTree(inaki, masters, LogicalNode.AND)
+mangalovers_tree.evaluate()  # > True
+```
