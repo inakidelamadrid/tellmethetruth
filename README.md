@@ -28,4 +28,27 @@ tellmethetruth is bases on building and nesting `BinaryTree` objects from its `t
   root4.evaluate()  # > True
 ```
 
-#
+## Building a tree with custom classes
+tellmethe truth can evaluate custom class instances as long as they declare a `to_bool` method. As its name says,it must return a boolean representation of the object.
+
+```python
+from tellmethetruth.tree import BinaryTree
+from tellmethetruth.logical import LogicalNode
+
+
+# we can test a tree of manga lovers
+class Person:
+  def __init__(self, name, hobbies=[]):
+    self.name=name
+    self.hobbies = hobbies
+
+  def to_bool():
+    return 'manga' in self.hobbies
+
+
+inaki = Person('Inaki', ['manga', 'board games'])
+vader = Person('Darth', ['power', 'dark force'])
+
+mangalovers_tree = BinaryTree(inaki, vader, LogicalNode.AND)
+mangalovers_tree.evaluate()  # > False
+```
