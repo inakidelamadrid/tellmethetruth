@@ -75,7 +75,32 @@ vader = Person('Darth', ['lightsaber', 'dark force'])
 yoda = Person('Darth', ['lightsaber', 'manga'])
 
 masters = BinaryTree(vader, yoda, LogicalNode.OR)
-# the masters tree now becomes a leaf for the mangalovers tree
 mangalovers_tree = BinaryTree(inaki, masters, LogicalNode.AND)
+mangalovers_tree.evaluate()  # > True
+```
+
+## Simplify tree building
+Use tellmethetruth utils module's functions to easily create AND and OR trees.
+
+```python
+from tellmethetruth.tree import BinaryTree
+from tellmethetruth.utils import logical_and_tree, logical_or_tree
+
+# we can test a tree of manga lovers
+class Person:
+  def __init__(self, name, hobbies=[]):
+    self.name = name
+    self.hobbies = hobbies
+
+  def to_bool(self):
+    return 'manga' in self.hobbies
+
+
+inaki = Person('Inaki', ['manga', 'board games'])
+vader = Person('Darth', ['lightsaber', 'dark force'])
+yoda = Person('Darth', ['lightsaber', 'manga'])
+
+masters = logical_or_tree(vader, yoda)
+mangalovers_tree = logical_and_tree(inaki, masters)
 mangalovers_tree.evaluate()  # > True
 ```
